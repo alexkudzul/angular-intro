@@ -1,0 +1,62 @@
+
+<!-- AJAX POST -->
+<h2>Crear usuario</h2>
+
+<form #newUser="ngForm" (ngSubmit)= "onSubmit(newUser)">
+
+  <p>
+    <label for="name">Nombre</label>
+    <input type="text" name="name" #name="ngModel" [(ngModel)] = "new_user.name" required>
+    <span *ngIf="name.touched && !name.valid">
+      El nombre no es valido
+    </span>
+  </p>
+
+  <p>
+    <label for="job">Trabajo</label>
+    <input type="text" name="job" #job="ngModel" [(ngModel)]="new_user.job" required>
+    <span *ngIf="job.touched && !job.valid">
+      El trabajo no es valido
+    </span>
+  </p>
+
+  <input type="submit" value="Guardar usuario" [disabled] = "!newUser.form.valid">
+
+</form>
+
+<!-- Si el campo viene con datos, que se muestre el div -->
+<div *ngIf="usuario_guardado">
+  <h2>El usuario se guardado correctamente</h2>
+  <h3>{{usuario_guardado.name}}</h3>
+  <h3>{{usuario_guardado.job}}</h3>
+</div>
+
+<hr>
+
+<!-- Los pipes o filtros son pequeñas funciones que se puede utilizar en la vista-->
+<!-- Ejemplo, convertir texto mayuscula a minuscula, formato de fechas -->
+
+<!-- Pipe de fecha, formatea una fecha y se utiliza con el simbolo | y date -->
+{{fecha | date:'fullDate' | uppercase}}
+<br>
+{{fecha | date:'dd/MM/yy'}}
+<br>
+{{'Hola con lowercase' | lowercase}}
+<br>
+
+<!-- Utilizar la pipe personalizado -->
+{{ 4 | calculadora: 2}}
+
+<hr>
+<input type="text" [(ngModel)] = "userId" (keyup.enter)="cargaUsuario()">
+<!-- Sino hay nada en el user -->
+<div *ngIf="!user">
+  Cargando...
+</div>
+
+<div *ngIf = "user">
+  <img src="{{user.avatar}}" width="200">
+  <h2>{{user.first_name + ' ' + user.last_name}}</h2>
+</div>
+
+

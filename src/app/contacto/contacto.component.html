@@ -1,0 +1,51 @@
+<h2>Contacto</h2>
+<!-- Indica que sera un formulario de angular -->
+<form #formContacto="ngForm" (ngSubmit)="onSubmit()">
+<!-- Vaciar el formulario, se envia formContacto al componente y se recibe en el onSubmit -->
+<!-- <form #formContacto="ngForm" (ngSubmit)="onSubmit(formContacto)"> -->
+
+  <!-- El # indica que sera un campo del formulariuo de angular, servira para validar los datos del campos -->
+  <!-- [(ngModel)] para modificar el objeto del modelo de datos "usuario" se encuentra en contacto.components.ts  -->
+  <!-- + en la expresion regular indica que se pueda repetir indefinidamente de veces las letras  -->
+
+  <label for="nombre">Nombre</label> <br>
+  <input type="text" name="nombre" #nombre="ngModel" [(ngModel)] = "usuario.nombre" required pattern = "[a-zA-Z]+"> 
+  
+  <!-- Si el campo nombre es tocado y el campo no es valido -->
+  <span *ngIf="nombre.touched && !nombre.valid">
+    El nombre es obligatorio
+  </span>
+
+  <br>
+
+  <label for="apellidos">Apellidos</label> <br>
+  <input type="text" name="apellidos" #apellidos="ngModel" [(ngModel)] = "usuario.apellidos" required pattern="[a-zA-Z]+"> 
+  
+  <!-- Si el campo apellidos es tocado y el campo no es valido -->
+  <span *ngIf="apellidos.touched && !apellidos.valid">
+    Los apellidos son obligatorios
+  </span>
+
+  <br>
+
+  <label for="email">Email</label> <br>
+  <input type="email" name="email" #email="ngModel" [(ngModel)] = "usuario.email" required> 
+  
+  <!-- Si el campo nombre es tocado y el campo no es valido -->
+  <span *ngIf="email.touched && !email.valid">
+    El email es obligatorio
+  </span>
+  
+  <br>
+
+  <label for="mensaje">Mensaje</label> <br>
+  <input type="text" name="mensaje" #mensaje="ngModel" [(ngModel)] = "usuario.mensaje" required> 
+  <!-- Si el campo nombre es tocado y el campo no es valido -->
+  <span *ngIf="mensaje.touched && !mensaje.valid">
+    El mensaje es obligatorio
+  </span>
+  
+  <br>
+  <!-- Si formContacto no es valido, que se sea disabled -->
+  <input type="submit" value="Enviar" [disabled] = "!formContacto.form.valid">
+</form>

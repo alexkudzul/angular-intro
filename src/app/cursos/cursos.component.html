@@ -1,0 +1,7 @@
+<h1>Componente cursos</h1>
+
+<button (click)="redirigir()">Ir a zapatos</button>
+
+<!-- Si la url tiene el parametro nombre que se muestre -->
+<h3 *ngIf="nombre">Bienvenido {{nombre}}</h3>
+<h3 *ngIf="followers">Tus seguidores son: {{followers}}</h3>
